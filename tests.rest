@@ -1,0 +1,93 @@
+@baseUrl = http://localhost:5050
+@json = application/json
+
+
+### GET lista produktów
+GET {{baseUrl}}/api/products
+Accept: {{json}}
+
+
+### POST dodaj produkt
+POST {{baseUrl}}/api/products
+Content-Type: {{json}}
+
+{
+  "name": "Test",
+  "price": 32.98
+}
+
+### POST dodaj produkt z nieprawidłową ceną
+POST {{baseUrl}}/api/products
+Content-Type: {{json}}
+
+{
+  "name": "Nieprawidłowa cena",
+  "price": -5
+}
+
+### PATCH uaktualizuj produkt
+PATCH {{baseUrl}}/api/products/1
+Content-Type: {{json}}
+
+{
+  "price": 0.99
+}
+
+
+### DELETE usuwanie produktu
+DELETE {{baseUrl}}/api/products/1
+
+### GET koszyk (pusty)
+GET {{baseUrl}}/api/cart
+Accept: {{json}}
+
+### dodaj produkt do koszyka
+POST {{baseUrl}}/api/cart/add
+Content-Type: {{json}}
+
+{
+  "product_id": 2,
+  "qty": 2
+}
+
+### dodaj produkt do koszyka z ilością 0 (błąd)
+POST {{baseUrl}}/api/cart/add
+Content-Type: {{json}}
+
+{
+  "product_id": 2,
+  "qty": 0
+}
+
+### PATCH koszyk - aktualizacja ilości produktu
+PATCH {{baseUrl}}/api/cart/item
+Content-Type: {{json}}
+
+{
+  "product_id": 2,
+  "qty": 5
+}
+
+### DELETE usuwanie produktu z koszyka
+DELETE {{baseUrl}}/api/cart/item/2
+
+
+### sprawdź koszyk po usunięciu produktu
+POST {{baseUrl}}/api/checkout
+
+### dodaj ponownie produkt do koszyka
+POST {{baseUrl}}/api/cart/add
+Content-Type: {{json}}
+
+{
+  "product_id": 2,
+  "qty": 3
+}
+
+### sprawdź koszyk przed finalizacją zamówienia
+POST {{baseUrl}}/api/checkout
+
+
+### pobierz historię zamówień
+GET {{baseUrl}}/api/orders
+Accept: {{json}}
