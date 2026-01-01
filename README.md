@@ -1,4 +1,4 @@
-# Shop API
+# Sklep API
 
 Aplikacja sklepu internetowego z koszykiem i obsługą zamówień (Node.js + SQLite).
 
